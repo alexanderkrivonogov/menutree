@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.menu.models import MenuItem
+from menu.models import MenuItem
 
 
 @admin.register(MenuItem)
