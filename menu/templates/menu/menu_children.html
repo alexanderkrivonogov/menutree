@@ -1,0 +1,36 @@
+{% load static menu %}
+
+{% for item in menu_children %}
+    {% if not item.parent_id %}
+        {% if item.children %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_{{ item.id }}" role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    {{ item.name }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_{{ item.id }}">
+                    {% draw_menu_children menu_items item.id %}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a class="dropdown-item" href="#">{{ item.name }}</a>
+            </li>
+        {% endif %}
+    {% else %}
+        {% if item.children %}
+            <li>
+                <a class="dropdown-item" href="#">{{ item.name }}</a>
+                <ul class="dropdown-menu dropdown-submenu">
+                    {% draw_menu_children menu_items item.id %}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a class="dropdown-item" href="#">{{ item.name }}</a>
+            </li>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
